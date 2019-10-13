@@ -1,0 +1,178 @@
+<html>
+  <head>
+    <title>sort.js</title>
+    <script src='js/lib/jquery-1.11.3.min.js'></script>
+    <script src='js/lib/bootstrap.min.js'></script>
+    <script src='js/sort.js'></script>
+    <link href='css/lib/bootstrap.min.css' rel='stylesheet'>
+    <link rel="stylesheet" type="text/css" href="css/style.css"/>
+    <link rel="stylesheet" type="text/css" href="css/styleRadioButton.css"/>
+    <style>
+      .compare {
+        font-weight: bold;
+        color: #1BEC81;
+      }
+      .swap {
+        font-weight: bold;
+        color: #E89A11;
+      }
+         * {
+       margin: 0;
+       padding: 0;
+      }
+      canvas {
+       
+        background-color:;
+        padding:10px;
+      }
+
+    </style>
+  </head>
+  <body style="background-color: #EDEDEC">
+    <div class='container-fluid' style="margin-left: 20px; background-color:">
+      <div class='row'>
+        <div class='col-xs-3' style="background-color:; padding-bottom:50px; height:80%; border:5px solid #3B99A5; border-radius: 25px; border-style:">
+
+          <div class='form-group'>
+            <br>
+  
+            
+          </div>
+              
+
+            
+            <br>
+
+          <div class='form-group'>
+            <label for='#algo-select'>Algorithm</label>
+            <select class='form-control' id='algo-select' style="">
+              <option value='quicksort' data-description="Worst-complexity: O(n^2)<br>
+              Average-complexity: O(N*logN)<br>Best-complexity: O(N*logN)
+                <br> Space-complexity: in-place">Quicksort</option>
+              <option value='bubblesort' data-description="Worst-complexity: O(n^2)<br>
+              Average-complexity: O(n^2)<br>Best-complexity: O(n)<br> Space-complexity: O(1)">
+             Bubble sort</option>
+              <option value='selectionsort' data-description="Worst-complexity: O(n^2)<br>
+              Average-complexity: O(n^2)<br>Best-complexity: O(n^2)<br> Space-complexity: O(1)">Selection sort</option>
+              <option value='insertionsort' data-description="Worst-complexity: O(n^2)<br>
+              Average-complexity: O(n^2)<br>Best-complexity: O(n)<br> Space-complexity: O(1)">Insertion sort</option>
+              <option value='heapsort' data-description="Worst-complexity: O(N*logN)<br>
+              Average-complexity: O(N*logN)<br>Best-complexity: O(N*logN)<br> Space-complexity: O(1)">Heapsort</option>
+              <option value='mergesort' data-description="Worst-complexity: O(N*logN)<br>
+              Average-complexity: O(NlogN)<br>Best-complexity: O(N*logN)<br> Space-complexity: O(n)">Merge sort</option>
+        
+            </select>
+            <span id="description" style=""></span>
+
+          </div>
+
+
+
+        
+
+       
+
+      <div class="slidecontainer">
+              <p><b>Array Size: </b><span id="demo"></span></p>
+              <input type="range" min="50" max="300" value="50" class="slider" id='array-size'>
+            
+               </div>
+               <br>
+
+            <div class="slidecontainer">
+              <p><b>Speed: </b><span id="demo2"></span> (ms) </p>
+            <input type="range" min="1" max="150" value="1" class="slider" id='interval'>
+            
+            </div>
+            
+            <br>
+
+
+
+
+         
+
+          <div class='text-center'>
+            <button class='btn btn-lg btn-primary' id='start-btn'>Start</button>
+          </div>
+        </div>
+        <div class='col-xs-9' id='canvas-div' style="margin-right:50px; width:70%; height:80%">
+          <canvas width="1920px" height="1080px" id="main-canvas" style="border:5px solid #3B99A5; border-radius: 25px; border-style:" >
+        </div>
+      </div>
+    </div>
+
+
+
+    <!--Round Slider-->
+    <script>
+
+      var slider = document.getElementById('array-size');
+      var output = document.getElementById("demo");
+      output.innerHTML = slider.value;
+
+      slider.oninput = function() {
+        output.innerHTML = this.value;
+      }
+    </script>
+     <script>
+
+      var slider2 = document.getElementById('interval');
+      var output2 = document.getElementById("demo2");
+      output2.innerHTML = slider2.value;
+
+      slider2.oninput = function() {
+        output2.innerHTML = this.value;
+      }
+    </script>
+
+
+    <!--description-->
+    <script>
+      $('#algo-select').change(function(){
+    var $selected = $(this).find(':selected');
+    
+    $('#description').html($selected.data('description'));
+    }).trigger('change');
+    </script>
+
+
+    <script>
+      $(function() {
+        var temp = null;
+
+        // Make the canvas fit the available space
+        var resize_canvas = function() {
+          $('#main-canvas').width($('#canvas-div').width());
+        }
+        resize_canvas();
+        $(window).resize(resize_canvas);
+
+
+        $('#start-btn').click(function() {
+          if (temp !== null) temp.cancel();
+
+          var n = parseInt($('#array-size').val());
+          var interval = parseInt($('#interval').val());
+          var algo = $('#algo-select').val();
+          var sort_fn = sorting.get_sort_fn(algo);
+
+          
+
+          var ary = [];
+          for (var i = 0; i < n; i++) {
+            ary.push(Math.random());
+          }
+         
+
+          var canvas = document.getElementById('main-canvas');
+          temp = new sorting.AnimatedArray(ary, canvas, interval);
+          sort_fn(temp);
+
+        });
+
+
+      });
+    </script>
+  </body>
+</html>
