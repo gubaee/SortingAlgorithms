@@ -25,7 +25,7 @@ var sorting = (function() {
 
 
     // Clear the canvas
-    ctx.fillStyle = '#EDEDEC';
+    ctx.fillStyle = 'white';
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
     // Find min and max elements
