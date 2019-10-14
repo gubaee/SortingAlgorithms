@@ -3,7 +3,7 @@ var sorting = (function() {
   var DEFAULT_COLOR = '#3F4A7E';
   var COMPARE_COLOR = '#1BEC81';
   var SWAP_COLOR = '#E57D42';
-  var SWAPPED_COLOR = '#3F4A7E';
+  var DEFAULT_COLOR2 = '#3D1657';
   
   function randint(low, high) {
     // Return a random integer in the range [low, high] inclusive.
@@ -70,7 +70,7 @@ var sorting = (function() {
       x += spacing + bar_width;
     }
     for (var i = ary.length/2; i < ary.length; i++) {
-      ctx.fillStyle = colors2[i];
+      ctx.fillStyle = colors[i];
       var y = convert_y(ary[i]);
       if (ary[i] >= 0) {
         ctx.fillRect(x, y, bar_width, y_zero - y);
@@ -94,7 +94,7 @@ var sorting = (function() {
     for (var i = 0; i < ary.length; i++) {
       this._ary_display.push(ary[i]);
       this._colors.push(DEFAULT_COLOR);
-      this._colors2.push(SWAPPED_COLOR);
+      this._colors2.push(DEFAULT_COLOR2);
     }
     draw_array(this._canvas, this._ary, this._colors,this._colors2);
 
