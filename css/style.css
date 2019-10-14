@@ -38,3 +38,21 @@
 .form-group{
 
 }
+
+.compare {
+  font-weight: bold;
+  color: #1BEC81;
+}
+.swap {
+  font-weight: bold;
+  color: #E57D42;
+}
+   * {
+ margin: 0;
+ padding: 0;
+}
+canvas {
+ 
+  background-color:;
+  padding:10px;
+}
