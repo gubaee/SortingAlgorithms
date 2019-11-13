@@ -73,17 +73,7 @@ var sorting = (function() {
 
     // Draw bars
     var x = spacing;
-    for (var i = 0; i <= ary.length/2; i++) {
-      ctx.fillStyle = colors[i];
-      var y = convert_y(ary[i]);
-      if (ary[i] >= 0) {
-        ctx.fillRect(x, y, bar_width, y_zero - y);
-      } else {
-        ctx.fillRect(x, y_zero, bar_width, y - y_zero);
-      }
-      x += spacing + bar_width;
-    }
-    for (var i = ary.length/2; i < ary.length; i++) {
+    for (var i = 0; i <= ary.length; i++) {
       ctx.fillStyle = colors[i];
       var y = convert_y(ary[i]);
       if (ary[i] >= 0) {
