@@ -58,10 +58,13 @@ var sorting = (function() {
 
     // Get max height of the bar
     function convert_y(y) {
-      // Want convert_y(max) = 0, convert_y(min) = canvas.height`
-      var a = canvas.height / (min - max);
-      var b = max * canvas.height / (max - min);
-      return a * y + b;
+      // Normalize each bar so that the bar with the largest value takes up the
+      //  full height of the canvas.
+      let percentage = y / max;
+      let height = canvas.height * percentage;
+      // Since bars are drawn from the bottom up, the height needs to be a
+      //  negative value
+      return -height;
     }
 
     // Draw a baseline for zero
@@ -76,11 +79,7 @@ var sorting = (function() {
     for (var i = 0; i <= ary.length; i++) {
       ctx.fillStyle = colors[i];
       var y = convert_y(ary[i]);
-      if (ary[i] >= 0) {
-        ctx.fillRect(x, y, bar_width, y_zero - y);
-      } else {
-        ctx.fillRect(x, y_zero, bar_width, y - y_zero);
-      }
+      ctx.fillRect(x, canvas.height, bar_width, y);
       x += spacing + bar_width;
     }
   }
