@@ -190,7 +190,7 @@ var sorting = (function() {
 
 
   function selectionsort(array) {
-    var n = array.length()-1;
+    var n = array.length();
     for (var i = 0; i < n; i++) {
       var min = i;
       for (var j = i; j < n; j++) {
