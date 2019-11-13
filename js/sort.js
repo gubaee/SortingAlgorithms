@@ -62,9 +62,7 @@ var sorting = (function() {
       //  full height of the canvas.
       let percentage = y / max;
       let height = canvas.height * percentage;
-      // Since bars are drawn from the bottom up, the height needs to be a
-      //  negative value
-      return -height;
+      return height;
     }
 
     // Draw a baseline for zero
@@ -79,7 +77,7 @@ var sorting = (function() {
     for (var i = 0; i <= ary.length; i++) {
       ctx.fillStyle = colors[i];
       var y = convert_y(ary[i]);
-      ctx.fillRect(x, canvas.height, bar_width, y);
+      ctx.fillRect(x, 0, bar_width, y);
       x += spacing + bar_width;
     }
   }
