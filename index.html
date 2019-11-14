@@ -143,8 +143,20 @@
           
 
           var ary = [];
+          // Values pushed to the array should be in the range (0, 1] so that
+          // all bars have a visible representation
           for (var i = 0; i < n; i++) {
-            ary.push(Math.random());
+            // Math.random() can't be used directly because it returns values
+            // in the range [0, 1)
+            let val = Math.random()
+            // Move the value into the range [0, 100) and make it an integral
+            //  value
+            val *= 100
+            val = Math.floor(val)
+            // Move the value into the range (0, 100] from [0, 100)
+            val += 1;
+            // Push a value in the range (0, 1]
+            ary.push(val / 100);
           }
          
 
